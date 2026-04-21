@@ -1,8 +1,6 @@
 package com.rohit.taskmanager.controller;
 
 import com.rohit.taskmanager.dto.user.UserResponseDto;
-import com.rohit.taskmanager.entity.User;
-import com.rohit.taskmanager.repo.TaskRepo;
 import com.rohit.taskmanager.service.CustomeUserDetailsService;
 import com.rohit.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/admin/users")
+public class AdminController {
 
     @Autowired
     CustomeUserDetailsService userDetailsService;

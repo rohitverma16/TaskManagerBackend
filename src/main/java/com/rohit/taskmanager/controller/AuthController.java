@@ -26,7 +26,7 @@ public class AuthController {
         this.userDetailsService = userDetailsService;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<String> authenticate(@RequestBody LoginRequestDto loginRequestDto) {
         authenticationManager.
                 authenticate( new UsernamePasswordAuthenticationToken(
