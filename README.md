@@ -9,6 +9,7 @@ A backend system built using Spring Boot that provides secure user authenticatio
 👥 Role-Based Authorization (USER / ADMIN)
 📋 Task Management (User-specific tasks)
 ⚠️ Global Exception Handling
+🐳 Dockerized(App + PostgreSQL)
 
 🧱 Tech Stack
 Java 17
@@ -51,7 +52,6 @@ User-specific data isolation for tasks
 🚧 Upcoming Enhancements
 Redis caching
 API rate limiting
-Docker support
 Logout with token invalidation
 Swagger API documentation   
 
