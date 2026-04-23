@@ -1,11 +1,11 @@
 package com.rohit.taskmanager.controller;
 
+import com.rohit.taskmanager.dto.task.TaskPageResponse;
 import com.rohit.taskmanager.dto.task.TaskRequestDto;
 import com.rohit.taskmanager.dto.task.TaskResponseDto;
 import com.rohit.taskmanager.entity.Status;
 import com.rohit.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,10 +27,10 @@ public class TaskController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<TaskResponseDto> getTasks(@RequestParam(required = false) Status status,
-                                          @RequestParam(defaultValue = "0") int page,
-                                          @RequestParam(defaultValue = "10") int size){
-        Page<TaskResponseDto> tasks;
+    public TaskPageResponse getTasks(@RequestParam(required = false) Status status,
+                                                      @RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "10") int size){
+        TaskPageResponse tasks;
         if(status != null){
             tasks=taskService.getTaskByStatus(status, page, size);
         }

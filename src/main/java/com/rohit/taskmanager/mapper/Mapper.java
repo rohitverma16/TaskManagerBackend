@@ -1,5 +1,6 @@
 package com.rohit.taskmanager.mapper;
 
+import com.rohit.taskmanager.dto.task.TaskPageResponse;
 import com.rohit.taskmanager.dto.task.TaskRequestDto;
 import com.rohit.taskmanager.dto.task.TaskResponseDto;
 import com.rohit.taskmanager.dto.user.UserRequestDto;
@@ -8,6 +9,7 @@ import com.rohit.taskmanager.entity.Status;
 import com.rohit.taskmanager.entity.Task;
 import com.rohit.taskmanager.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -50,5 +52,16 @@ public class Mapper {
                 task.getStatus(),
                 task.getCreatedAt(),
                 task.getCompletedAt());
+    }
+
+    public TaskPageResponse toTaskPageResponse(Page<TaskResponseDto> page) {
+        return new TaskPageResponse(
+                page.getContent(),
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isLast()
+        );
     }
 }
