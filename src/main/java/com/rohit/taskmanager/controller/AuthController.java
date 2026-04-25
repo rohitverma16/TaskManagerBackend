@@ -5,12 +5,15 @@ import com.rohit.taskmanager.dto.user.UserRequestDto;
 import com.rohit.taskmanager.entity.User;
 import com.rohit.taskmanager.jwt.JwtUtil;
 import com.rohit.taskmanager.service.CustomeUserDetailsService;
+import com.rohit.taskmanager.service.TokenBlackListService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,11 +22,13 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final CustomeUserDetailsService userDetailsService;
+    private final TokenBlackListService tokenBlackListService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, CustomeUserDetailsService userDetailsService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, CustomeUserDetailsService userDetailsService, TokenBlackListService tokenBlackListService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
+        this.tokenBlackListService = tokenBlackListService;
     }
 
     @PostMapping("/login")
@@ -40,6 +45,23 @@ public class AuthController {
     public ResponseEntity<String> registerUser(@RequestBody UserRequestDto userRequestDto) {
         userDetailsService.save(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        String token = extractToken(request);
+        long remainingTime=jwtUtil.getRemainingValidity(token);
+        tokenBlackListService.blacklist(token,remainingTime);
+        return ResponseEntity.ok("Logged Out successfully");
+    }
+
+    private String extractToken(HttpServletRequest request){
+        String header = request.getHeader("Authorization");
+        String token = null;
+        if(header != null &&header.startsWith("Bearer ")){
+            return token = header.substring(7);
+        }
+        throw new RuntimeException("Token not found");
     }
 
 }

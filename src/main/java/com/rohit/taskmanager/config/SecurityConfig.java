@@ -3,6 +3,7 @@ package com.rohit.taskmanager.config;
 import com.rohit.taskmanager.jwt.JwtFilter;
 import com.rohit.taskmanager.jwt.JwtUtil;
 import com.rohit.taskmanager.service.CustomeUserDetailsService;
+import com.rohit.taskmanager.service.TokenBlackListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,8 +42,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtFilter jwtFilter(JwtUtil jwtUtil, CustomeUserDetailsService customeUserDetailsService) {
-        return new JwtFilter(jwtUtil, customeUserDetailsService);
+    public JwtFilter jwtFilter(JwtUtil jwtUtil, CustomeUserDetailsService customeUserDetailsService, TokenBlackListService blacklistService) {
+        return new JwtFilter(jwtUtil, customeUserDetailsService,blacklistService);
     }
 
     @Bean

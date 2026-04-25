@@ -52,4 +52,10 @@ public class JwtUtil {
     public boolean isTokenExpired(String token) {
         return getClaim(token).getExpiration().before(new Date());
     }
+
+    public long getRemainingValidity(String token) {
+        Date expirationTime = getClaim(token).getExpiration();
+        long remaining= expirationTime.getTime() - System.currentTimeMillis();
+        return Math.max(remaining, 0);
+    }
 }
