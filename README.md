@@ -11,7 +11,8 @@ A backend system built using Spring Boot that provides secure user authenticatio
 ⚠️ Global Exception Handling  
 🔴 Redis caching  
 🐳 Dockerized(App + PostgreSQL)  
-🔐 Logout with Token Invalidation
+🔐 Logout with Token Invalidation  
+🚦 Rate Limiting (main header)
 
 🧱 Tech Stack  
 Java 17  
@@ -55,8 +56,7 @@ Secure password storage with BCrypt
 Role-based access control using Spring Security  
 User-specific data isolation for tasks
 
-🚧 Upcoming Enhancements   
-API rate limiting   
+🚧 Upcoming Enhancements  
 Swagger API documentation
 
 👨‍💻 Author  
