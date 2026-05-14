@@ -1,6 +1,8 @@
 package com.rohit.taskmanager.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -11,10 +13,13 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String title;
     private String description;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Status status;
+    @NotNull
     private LocalDateTime createdAt;
     private LocalDateTime completedAt;
 

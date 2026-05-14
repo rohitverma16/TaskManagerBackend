@@ -5,6 +5,7 @@ import com.rohit.taskmanager.dto.task.TaskRequestDto;
 import com.rohit.taskmanager.dto.task.TaskResponseDto;
 import com.rohit.taskmanager.entity.Status;
 import com.rohit.taskmanager.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class TaskController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto taskRequestDto){
+    public ResponseEntity<TaskResponseDto> createTask(@Valid @RequestBody TaskRequestDto taskRequestDto){
         TaskResponseDto task = taskService.createTask(taskRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
     }

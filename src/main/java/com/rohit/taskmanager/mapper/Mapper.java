@@ -1,5 +1,6 @@
 package com.rohit.taskmanager.mapper;
 
+import com.rohit.taskmanager.dto.exception.FieldErrorDto;
 import com.rohit.taskmanager.dto.task.TaskPageResponse;
 import com.rohit.taskmanager.dto.task.TaskRequestDto;
 import com.rohit.taskmanager.dto.task.TaskResponseDto;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
 
 import java.time.LocalDateTime;
 
@@ -63,5 +65,9 @@ public class Mapper {
                 page.getTotalPages(),
                 page.isLast()
         );
+    }
+
+    public FieldErrorDto toFieldErrorDto(FieldError fieldError){
+        return new FieldErrorDto(fieldError.getField(), fieldError.getDefaultMessage());
     }
 }

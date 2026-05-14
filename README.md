@@ -12,7 +12,8 @@ A backend system built using Spring Boot that provides secure user authenticatio
 🔴 Redis caching  
 🐳 Dockerized(App + PostgreSQL)  
 🔐 Logout with Token Invalidation  
-🚦 Rate Limiting (main header)
+🚦 Rate Limiting (main header)  
+✅ Bean Validation  
 
 🧱 Tech Stack  
 Java 17  
